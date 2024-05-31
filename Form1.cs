@@ -29,8 +29,10 @@ namespace Examen_Programacion1
             comboBox_empastado.DataSource = emp;
             contador.actual = 0;
             contador.TotalDatos = Todo.Count;
+          
+
         }
-        
+
         private void button_crear_Click(object sender, EventArgs e)
         {
             libro.nombre = textBox_nombre.Text;
@@ -42,7 +44,7 @@ namespace Examen_Programacion1
             libro.autor = textBox_autor.Text;
 
             conexion.Crear(libro);
-            Todo = conexion.buscarTodo();
+            
         }
 
         private void button_buscar_Click(object sender, EventArgs e)
@@ -65,7 +67,7 @@ namespace Examen_Programacion1
         public void BuscarId(int idLibros)
         {
             
-            //contador.TotalDatos = conexion.buscarTodo().Count;
+            contador.TotalDatos = conexion.buscarTodo().Count;
             contador.actual = idLibros;
             if (contador.actual > contador.TotalDatos)
             {
@@ -73,17 +75,11 @@ namespace Examen_Programacion1
             }
             else if (contador.actual <= 0)
             {
-                contador.actual=contador.TotalDatos-1;
+                contador.actual=contador.TotalDatos;
             }
-            DataRow lib = conexion.Buscar(contador.actual);
-            textBox_id.Text = lib["idLibros"].ToString();
-            textBox_nombre.Text = lib["Nombre"].ToString();
-            textBox_genero.Text = lib["Genero"].ToString();
-            comboBox_empastado.Text = lib["Empastado"].ToString();
-            checkBox_disponible.Checked = (bool)lib["Disponible"];
-            dateTimePicker_publicacion.Value = (DateTime)lib["Publicacion"];
-            numericUpDown_edicion.Value = (int)lib["Edicion"];
-            textBox_autor.Text = lib["Autor"].ToString();
+            
+            dataGridView_libros.DataSource=conexion.Buscar(contador.actual);
+            
 
         }
 
@@ -93,6 +89,25 @@ namespace Examen_Programacion1
             contador.actual--;
             BuscarId(contador.actual);
         }
-        
+
+        private void button_siguiente_Click(object sender, EventArgs e)
+        {
+            contador.actual++;
+            BuscarId(contador.actual);
+        }
+
+        private void button_borrar_Click(object sender, EventArgs e)
+        {
+            if (textBox_id.Text == "")
+            {
+                MessageBox.Show("Necesita Ingresar una ID valida para Poder borrar los Datos");
+            }
+            else
+            {
+                int indx;
+                int.TryParse(textBox_id.Text, out indx);
+                conexion.Borrar(indx);
+            }
+        }
     }
 }

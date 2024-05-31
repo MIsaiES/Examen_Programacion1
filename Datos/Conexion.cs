@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,43 +13,30 @@ namespace Examen_Programacion1.Datos
     internal class Conexion
     {
         string conexion = "server=localhost;database=examenprogra1;user=root;password=mdi9382";
-        private MySqlConnection conexionConnection;
+        MySqlConnection conexionConnection;
         public Conexion()
-        {
+        { 
             conexionConnection = new MySqlConnection(conexion);
+           
         }
 
+        
         public DataTable Buscar(int idlibros)
         {
             DataTable tabla = new DataTable();
 
-            //if (idlibros == 0)
-            //{
-            //    try
-            //    {
-            //        string consulta = "SELECT * FROM libros";
-            //        MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
-            //        MySqlDataAdapter tablasql = new MySqlDataAdapter(command);
-            //        conexionConnection.Open();
-            //        tablasql.Fill(tabla);
-            //    }
-            //    catch (Exception excp) { MessageBox.Show("Fallo al Momento de Mostrar los Datos, Error: " + excp.Message); }
-            //    finally { conexionConnection.Close(); }
-            //}
-            //else
-            //{
                 try
                 {
-                    string consulta = "SELECT * FROM libros WHERE idlibros=@idlibros";
+                    string consulta = "SELECT * FROM libros WHERE idLibros=@idLibros";
                     MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
-                    command.Parameters.AddWithValue("@idlibros", idlibros);
+                    command.Parameters.AddWithValue("@idLibros", idlibros);
                     MySqlDataAdapter tablasql = new MySqlDataAdapter(command);
                     conexionConnection.Open();
                     tablasql.Fill(tabla);
                 }
                 catch (Exception excp) { MessageBox.Show("Fallo al Momento de Mostrar los Datos, Error: " + excp.Message); }
                 finally { conexionConnection.Close(); }
-            //}
+            
             return tabla;
         }
 
@@ -103,13 +91,14 @@ namespace Examen_Programacion1.Datos
         public List<Libro> buscarTodo()
         {
             List<Libro> lista = new List<Libro> ();
-            using (conexionConnection)
+            
+            using (MySqlConnection conect = new MySqlConnection(conexion))
             {
                 string consulta = "SELECT * FROM libros";
 
                 try
-                {   MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
-                    conexionConnection.Open();
+                {   MySqlCommand command = new MySqlCommand(consulta, conect);
+                    conect.Open();
                     MySqlDataReader lector = command.ExecuteReader();
                     while (lector.Read())
                     {
@@ -130,9 +119,25 @@ namespace Examen_Programacion1.Datos
                 }
                 catch (Exception excp) { MessageBox.Show("Fallo al Momento de Leer los Datos, Error: " + excp.Message); }
 
-                finally { conexionConnection.Close(); }
+                finally { conect.Close(); }
             }
             return lista;
+        }
+        public void Borrar(int idLibros)
+        {
+            try
+            {
+                string consulta = "DELETE FROM libros Where idLibros = @idLibros";
+                MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
+                command.Parameters.AddWithValue("@idLibros", idLibros);
+
+                conexionConnection.Open();
+                command.ExecuteNonQuery();
+                MessageBox.Show("Datos Eliminados Exitosamente");
+            }
+            catch (Exception excp) { MessageBox.Show("Fallo al Momento de Borrar los Datos, Error: " + excp.Message); }
+
+            finally { conexionConnection.Close(); }
         }
 
     }

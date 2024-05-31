@@ -169,6 +169,7 @@
             this.button_borrar.TabIndex = 13;
             this.button_borrar.Text = "Borrar";
             this.button_borrar.UseVisualStyleBackColor = true;
+            this.button_borrar.Click += new System.EventHandler(this.button_borrar_Click);
             // 
             // button_buscar
             // 
@@ -277,6 +278,7 @@
             this.button_siguiente.TabIndex = 22;
             this.button_siguiente.Text = "Siguiente";
             this.button_siguiente.UseVisualStyleBackColor = true;
+            this.button_siguiente.Click += new System.EventHandler(this.button_siguiente_Click);
             // 
             // button_anterior
             // 
