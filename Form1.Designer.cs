@@ -47,6 +47,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numericUpDown_edicion = new System.Windows.Forms.NumericUpDown();
             this.label_edicion = new System.Windows.Forms.Label();
+            this.label_autor = new System.Windows.Forms.Label();
+            this.textBox_autor = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_edicion)).BeginInit();
@@ -55,7 +57,7 @@
             // label_nombre
             // 
             this.label_nombre.AutoSize = true;
-            this.label_nombre.Location = new System.Drawing.Point(40, 42);
+            this.label_nombre.Location = new System.Drawing.Point(40, 12);
             this.label_nombre.Name = "label_nombre";
             this.label_nombre.Size = new System.Drawing.Size(44, 13);
             this.label_nombre.TabIndex = 0;
@@ -64,7 +66,7 @@
             // label_genero
             // 
             this.label_genero.AutoSize = true;
-            this.label_genero.Location = new System.Drawing.Point(40, 68);
+            this.label_genero.Location = new System.Drawing.Point(40, 38);
             this.label_genero.Name = "label_genero";
             this.label_genero.Size = new System.Drawing.Size(42, 13);
             this.label_genero.TabIndex = 1;
@@ -73,7 +75,7 @@
             // label_Empastado
             // 
             this.label_Empastado.AutoSize = true;
-            this.label_Empastado.Location = new System.Drawing.Point(40, 100);
+            this.label_Empastado.Location = new System.Drawing.Point(40, 70);
             this.label_Empastado.Name = "label_Empastado";
             this.label_Empastado.Size = new System.Drawing.Size(60, 13);
             this.label_Empastado.TabIndex = 2;
@@ -82,7 +84,7 @@
             // label_publicacion
             // 
             this.label_publicacion.AutoSize = true;
-            this.label_publicacion.Location = new System.Drawing.Point(38, 150);
+            this.label_publicacion.Location = new System.Drawing.Point(38, 120);
             this.label_publicacion.Name = "label_publicacion";
             this.label_publicacion.Size = new System.Drawing.Size(62, 13);
             this.label_publicacion.TabIndex = 4;
@@ -90,14 +92,14 @@
             // 
             // textBox_nombre
             // 
-            this.textBox_nombre.Location = new System.Drawing.Point(91, 42);
+            this.textBox_nombre.Location = new System.Drawing.Point(91, 12);
             this.textBox_nombre.Name = "textBox_nombre";
             this.textBox_nombre.Size = new System.Drawing.Size(100, 20);
             this.textBox_nombre.TabIndex = 5;
             // 
             // textBox_genero
             // 
-            this.textBox_genero.Location = new System.Drawing.Point(91, 68);
+            this.textBox_genero.Location = new System.Drawing.Point(91, 38);
             this.textBox_genero.Name = "textBox_genero";
             this.textBox_genero.Size = new System.Drawing.Size(100, 20);
             this.textBox_genero.TabIndex = 6;
@@ -105,7 +107,7 @@
             // comboBox_empastado
             // 
             this.comboBox_empastado.FormattingEnabled = true;
-            this.comboBox_empastado.Location = new System.Drawing.Point(107, 100);
+            this.comboBox_empastado.Location = new System.Drawing.Point(107, 70);
             this.comboBox_empastado.Name = "comboBox_empastado";
             this.comboBox_empastado.Size = new System.Drawing.Size(121, 21);
             this.comboBox_empastado.TabIndex = 7;
@@ -114,7 +116,7 @@
             // 
             this.checkBox_disponible.AutoSize = true;
             this.checkBox_disponible.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox_disponible.Location = new System.Drawing.Point(43, 127);
+            this.checkBox_disponible.Location = new System.Drawing.Point(43, 97);
             this.checkBox_disponible.Name = "checkBox_disponible";
             this.checkBox_disponible.Size = new System.Drawing.Size(75, 17);
             this.checkBox_disponible.TabIndex = 8;
@@ -123,7 +125,7 @@
             // 
             // dateTimePicker_publicacion
             // 
-            this.dateTimePicker_publicacion.Location = new System.Drawing.Point(106, 150);
+            this.dateTimePicker_publicacion.Location = new System.Drawing.Point(106, 120);
             this.dateTimePicker_publicacion.Name = "dateTimePicker_publicacion";
             this.dateTimePicker_publicacion.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker_publicacion.TabIndex = 9;
@@ -173,6 +175,7 @@
             this.button_buscar.TabIndex = 14;
             this.button_buscar.Text = "Buscar";
             this.button_buscar.UseVisualStyleBackColor = true;
+            this.button_buscar.Click += new System.EventHandler(this.button_buscar_Click);
             // 
             // label_id
             // 
@@ -197,7 +200,7 @@
             this.groupBox1.Controls.Add(this.label_id);
             this.groupBox1.Controls.Add(this.button_borrar);
             this.groupBox1.Controls.Add(this.button_buscar);
-            this.groupBox1.Location = new System.Drawing.Point(271, 21);
+            this.groupBox1.Location = new System.Drawing.Point(312, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(235, 111);
             this.groupBox1.TabIndex = 17;
@@ -206,7 +209,7 @@
             // 
             // numericUpDown_edicion
             // 
-            this.numericUpDown_edicion.Location = new System.Drawing.Point(106, 180);
+            this.numericUpDown_edicion.Location = new System.Drawing.Point(106, 150);
             this.numericUpDown_edicion.Maximum = new decimal(new int[] {
             50,
             0,
@@ -230,17 +233,35 @@
             // 
             this.label_edicion.AutoEllipsis = true;
             this.label_edicion.AutoSize = true;
-            this.label_edicion.Location = new System.Drawing.Point(42, 182);
+            this.label_edicion.Location = new System.Drawing.Point(42, 152);
             this.label_edicion.Name = "label_edicion";
             this.label_edicion.Size = new System.Drawing.Size(42, 13);
             this.label_edicion.TabIndex = 19;
             this.label_edicion.Text = "Edición";
+            // 
+            // label_autor
+            // 
+            this.label_autor.AutoSize = true;
+            this.label_autor.Location = new System.Drawing.Point(42, 177);
+            this.label_autor.Name = "label_autor";
+            this.label_autor.Size = new System.Drawing.Size(32, 13);
+            this.label_autor.TabIndex = 20;
+            this.label_autor.Text = "Autor";
+            // 
+            // textBox_autor
+            // 
+            this.textBox_autor.Location = new System.Drawing.Point(107, 177);
+            this.textBox_autor.Name = "textBox_autor";
+            this.textBox_autor.Size = new System.Drawing.Size(100, 20);
+            this.textBox_autor.TabIndex = 21;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox_autor);
+            this.Controls.Add(this.label_autor);
             this.Controls.Add(this.label_edicion);
             this.Controls.Add(this.numericUpDown_edicion);
             this.Controls.Add(this.groupBox1);
@@ -287,6 +308,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown numericUpDown_edicion;
         private System.Windows.Forms.Label label_edicion;
+        private System.Windows.Forms.Label label_autor;
+        private System.Windows.Forms.TextBox textBox_autor;
     }
 }
 

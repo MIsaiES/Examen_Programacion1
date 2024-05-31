@@ -11,7 +11,7 @@ namespace Examen_Programacion1.Datos
 {
     internal class Conexion
     {
-        string conexion = "server=localhost;database=ExamenFinalProgramacion1;user=root;password=mdi9382";
+        string conexion = "server=localhost;database=examenprogra1;user=root;password=mdi9382";
         private MySqlConnection conexionConnection;
         public Conexion()
         {
@@ -52,11 +52,11 @@ namespace Examen_Programacion1.Datos
             return tabla;//Aqui me Quedo hoy
         }
 
-        public void Ins(Libro libro) 
+        public void Crear(Libro libro) 
         {
             try
             {
-                string consulta = "INSERT INTO libros (Nombre, Genero, Empastado, Disponible, Publicacion, Edicion) VALUES (@Nombre, @Genero, @Empastado, @Disponible, @Publicacion, @Edicion)";
+                string consulta = "INSERT INTO libros (Nombre, Genero, Empastado, Disponible, Publicacion, Edicion, Autor) VALUES (@Nombre, @Genero, @Empastado, @Disponible, @Publicacion, @Edicion, @Autor)";
                 MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
                 command.Parameters.AddWithValue("@Nombre", libro.nombre);
                 command.Parameters.AddWithValue("@Genero", libro.genero);
@@ -64,6 +64,7 @@ namespace Examen_Programacion1.Datos
                 command.Parameters.AddWithValue("@Disponible", libro.disponible);
                 command.Parameters.AddWithValue("@Publicacion", libro.publicacion);
                 command.Parameters.AddWithValue("@Edicion", libro.edicion);
+                command.Parameters.AddWithValue("@Autor", libro.autor);
 
                 conexionConnection.Open();
                 command.ExecuteNonQuery();
@@ -71,6 +72,11 @@ namespace Examen_Programacion1.Datos
             catch (Exception excp) { MessageBox.Show("Falló al Momento de Ingresar los Datos, Error: "+excp.Message); }
                 
             finally { conexionConnection.Close(); }
+        }
+
+        public void Actualizar(Libro libro)
+        {
+            string consulta = "UPDATE libros SET Nombre = @Nombre, Genero =  @Genero, Empastado = @Empastado, Disponible = @Disponible, Publicacion = @Publicacion, Edicion =  @Edicion, Autor =  @Autor) ";
         }
     }
 }

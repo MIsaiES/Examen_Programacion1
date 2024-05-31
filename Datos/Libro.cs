@@ -15,6 +15,7 @@ namespace Examen_Programacion1.Datos
         public bool disponible { get; set; }
         public DateTime publicacion {  get; set; }
         public decimal edicion { get; set; }
+        public string autor {  get; set; }
 
     }
 }

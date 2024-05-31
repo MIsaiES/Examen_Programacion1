@@ -28,9 +28,19 @@ namespace Examen_Programacion1
             libro.disponible = checkBox_disponible.Checked;
             libro.publicacion = dateTimePicker_publicacion.Value;
             libro.edicion = numericUpDown_edicion.Value;
-            
+            libro.autor = textBox_autor.Text;
 
+            conexion.Crear(libro);
         }
-        
+
+        private void button_buscar_Click(object sender, EventArgs e)
+        {
+            if (textBox_id.Text == "")
+            {
+                libro.id = 0;
+            }
+
+            conexion.Buscar(libro.id);
+        }
     }
 }
