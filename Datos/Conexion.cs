@@ -22,21 +22,21 @@ namespace Examen_Programacion1.Datos
         {
             DataTable tabla = new DataTable();
 
-            if (idlibros == 0)
-            {
-                try
-                {
-                    string consulta = "SELECT * FROM libros";
-                    MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
-                    MySqlDataAdapter tablasql = new MySqlDataAdapter(command);
-                    conexionConnection.Open();
-                    tablasql.Fill(tabla);
-                }
-                catch (Exception excp) { MessageBox.Show("Falló al Momento de Mostrar los Datos, Error: " + excp.Message); }
-                finally { conexionConnection.Close(); }
-            }
-            else
-            {
+            //if (idlibros == 0)
+            //{
+            //    try
+            //    {
+            //        string consulta = "SELECT * FROM libros";
+            //        MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
+            //        MySqlDataAdapter tablasql = new MySqlDataAdapter(command);
+            //        conexionConnection.Open();
+            //        tablasql.Fill(tabla);
+            //    }
+            //    catch (Exception excp) { MessageBox.Show("Fallo al Momento de Mostrar los Datos, Error: " + excp.Message); }
+            //    finally { conexionConnection.Close(); }
+            //}
+            //else
+            //{
                 try
                 {
                     string consulta = "SELECT * FROM libros WHERE idlibros=@idlibros";
@@ -46,10 +46,10 @@ namespace Examen_Programacion1.Datos
                     conexionConnection.Open();
                     tablasql.Fill(tabla);
                 }
-                catch (Exception excp) { MessageBox.Show("Falló al Momento de Mostrar los Datos, Error: " + excp.Message); }
+                catch (Exception excp) { MessageBox.Show("Fallo al Momento de Mostrar los Datos, Error: " + excp.Message); }
                 finally { conexionConnection.Close(); }
-            }
-            return tabla;//Aqui me Quedo hoy
+            //}
+            return tabla;
         }
 
         public void Crear(Libro libro) 
@@ -68,15 +68,72 @@ namespace Examen_Programacion1.Datos
 
                 conexionConnection.Open();
                 command.ExecuteNonQuery();
+                MessageBox.Show("Registro Creado Exitosamente");
             }
-            catch (Exception excp) { MessageBox.Show("Falló al Momento de Ingresar los Datos, Error: "+excp.Message); }
+            catch (Exception excp) { MessageBox.Show("Fallo al Momento de Ingresar los Datos, Error: "+excp.Message); }
                 
             finally { conexionConnection.Close(); }
         }
 
         public void Actualizar(Libro libro)
         {
-            string consulta = "UPDATE libros SET Nombre = @Nombre, Genero =  @Genero, Empastado = @Empastado, Disponible = @Disponible, Publicacion = @Publicacion, Edicion =  @Edicion, Autor =  @Autor) ";
+            try
+            { 
+            string consulta = "UPDATE libros SET Nombre = @Nombre, Genero =  @Genero, Empastado = @Empastado, Disponible = @Disponible, Publicacion = @Publicacion, Edicion =  @Edicion, Autor =  @Autor WHERE idLibros = @idLibros ";
+            MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
+            command.Parameters.AddWithValue("@Nombre", libro.nombre);
+            command.Parameters.AddWithValue("@Genero", libro.genero);
+            command.Parameters.AddWithValue("@Empastado", libro.empastado);
+            command.Parameters.AddWithValue("@Disponible", libro.disponible);
+            command.Parameters.AddWithValue("@Publicacion", libro.publicacion);
+            command.Parameters.AddWithValue("@Edicion", libro.edicion);
+            command.Parameters.AddWithValue("@Autor", libro.autor);
+            command.Parameters.AddWithValue("@idLibros", libro.id);
+
+            conexionConnection.Open();
+            command.ExecuteNonQuery();
+            MessageBox.Show("Registro Actualizado Exitosamente");
+            }
+            catch (Exception excp) { MessageBox.Show("Fallo al Momento de Actualizar los Datos, Error: " + excp.Message); }
+
+            finally { conexionConnection.Close(); }
+        
+    }
+
+        public List<Libro> buscarTodo()
+        {
+            List<Libro> lista = new List<Libro> ();
+            using (conexionConnection)
+            {
+                string consulta = "SELECT * FROM libros";
+
+                try
+                {   MySqlCommand command = new MySqlCommand(consulta, conexionConnection);
+                    conexionConnection.Open();
+                    MySqlDataReader lector = command.ExecuteReader();
+                    while (lector.Read())
+                    {
+                        Libro libro = new Libro
+                            (
+                                ID: lector.GetInt32("idLibros"), 
+                                Nombre: lector.GetString("Nombre"),
+                                Genero: lector.GetString("Genero"), 
+                                Empastado:lector.GetString("Empastado"),
+                                Disponible: lector.GetBoolean("Disponible"), 
+                                Publicacion: lector.GetDateTime("Publicacion"),
+                                Edicion: lector.GetDecimal("Edicion"), Autor: 
+                                lector.GetString("Autor")
+                            ) ;
+                        lista.Add(libro);
+                    }
+                    lector.Close();
+                }
+                catch (Exception excp) { MessageBox.Show("Fallo al Momento de Leer los Datos, Error: " + excp.Message); }
+
+                finally { conexionConnection.Close(); }
+            }
+            return lista;
         }
+
     }
 }

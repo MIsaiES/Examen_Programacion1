@@ -37,7 +37,7 @@
             this.comboBox_empastado = new System.Windows.Forms.ComboBox();
             this.checkBox_disponible = new System.Windows.Forms.CheckBox();
             this.dateTimePicker_publicacion = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_libros = new System.Windows.Forms.DataGridView();
             this.button_actualizar = new System.Windows.Forms.Button();
             this.button_crear = new System.Windows.Forms.Button();
             this.button_borrar = new System.Windows.Forms.Button();
@@ -45,11 +45,14 @@
             this.label_id = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_buscarTodo = new System.Windows.Forms.Button();
             this.numericUpDown_edicion = new System.Windows.Forms.NumericUpDown();
             this.label_edicion = new System.Windows.Forms.Label();
             this.label_autor = new System.Windows.Forms.Label();
             this.textBox_autor = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.button_siguiente = new System.Windows.Forms.Button();
+            this.button_anterior = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_libros)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_edicion)).BeginInit();
             this.SuspendLayout();
@@ -116,7 +119,7 @@
             // 
             this.checkBox_disponible.AutoSize = true;
             this.checkBox_disponible.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox_disponible.Location = new System.Drawing.Point(43, 97);
+            this.checkBox_disponible.Location = new System.Drawing.Point(41, 97);
             this.checkBox_disponible.Name = "checkBox_disponible";
             this.checkBox_disponible.Size = new System.Drawing.Size(75, 17);
             this.checkBox_disponible.TabIndex = 8;
@@ -130,27 +133,27 @@
             this.dateTimePicker_publicacion.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker_publicacion.TabIndex = 9;
             // 
-            // dataGridView1
+            // dataGridView_libros
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(43, 278);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 45;
-            this.dataGridView1.Size = new System.Drawing.Size(711, 150);
-            this.dataGridView1.TabIndex = 10;
+            this.dataGridView_libros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_libros.Location = new System.Drawing.Point(43, 259);
+            this.dataGridView_libros.Name = "dataGridView_libros";
+            this.dataGridView_libros.RowHeadersWidth = 45;
+            this.dataGridView_libros.Size = new System.Drawing.Size(711, 169);
+            this.dataGridView_libros.TabIndex = 10;
             // 
             // button_actualizar
             // 
-            this.button_actualizar.Location = new System.Drawing.Point(152, 47);
+            this.button_actualizar.Location = new System.Drawing.Point(152, 75);
             this.button_actualizar.Name = "button_actualizar";
-            this.button_actualizar.Size = new System.Drawing.Size(75, 23);
+            this.button_actualizar.Size = new System.Drawing.Size(124, 23);
             this.button_actualizar.TabIndex = 11;
             this.button_actualizar.Text = "Actualizar";
             this.button_actualizar.UseVisualStyleBackColor = true;
             // 
             // button_crear
             // 
-            this.button_crear.Location = new System.Drawing.Point(91, 216);
+            this.button_crear.Location = new System.Drawing.Point(106, 214);
             this.button_crear.Name = "button_crear";
             this.button_crear.Size = new System.Drawing.Size(190, 39);
             this.button_crear.TabIndex = 12;
@@ -160,9 +163,9 @@
             // 
             // button_borrar
             // 
-            this.button_borrar.Location = new System.Drawing.Point(152, 76);
+            this.button_borrar.Location = new System.Drawing.Point(152, 104);
             this.button_borrar.Name = "button_borrar";
-            this.button_borrar.Size = new System.Drawing.Size(75, 23);
+            this.button_borrar.Size = new System.Drawing.Size(124, 23);
             this.button_borrar.TabIndex = 13;
             this.button_borrar.Text = "Borrar";
             this.button_borrar.UseVisualStyleBackColor = true;
@@ -171,16 +174,16 @@
             // 
             this.button_buscar.Location = new System.Drawing.Point(152, 18);
             this.button_buscar.Name = "button_buscar";
-            this.button_buscar.Size = new System.Drawing.Size(75, 23);
+            this.button_buscar.Size = new System.Drawing.Size(124, 23);
             this.button_buscar.TabIndex = 14;
-            this.button_buscar.Text = "Buscar";
+            this.button_buscar.Text = "Buscar por ID";
             this.button_buscar.UseVisualStyleBackColor = true;
             this.button_buscar.Click += new System.EventHandler(this.button_buscar_Click);
             // 
             // label_id
             // 
             this.label_id.AutoSize = true;
-            this.label_id.Location = new System.Drawing.Point(22, 52);
+            this.label_id.Location = new System.Drawing.Point(22, 62);
             this.label_id.Name = "label_id";
             this.label_id.Size = new System.Drawing.Size(18, 13);
             this.label_id.TabIndex = 15;
@@ -188,24 +191,35 @@
             // 
             // textBox_id
             // 
-            this.textBox_id.Location = new System.Drawing.Point(46, 49);
+            this.textBox_id.Location = new System.Drawing.Point(46, 59);
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.Size = new System.Drawing.Size(100, 20);
             this.textBox_id.TabIndex = 16;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button_buscarTodo);
             this.groupBox1.Controls.Add(this.textBox_id);
             this.groupBox1.Controls.Add(this.button_actualizar);
             this.groupBox1.Controls.Add(this.label_id);
             this.groupBox1.Controls.Add(this.button_borrar);
             this.groupBox1.Controls.Add(this.button_buscar);
-            this.groupBox1.Location = new System.Drawing.Point(312, 12);
+            this.groupBox1.Location = new System.Drawing.Point(417, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(235, 111);
+            this.groupBox1.Size = new System.Drawing.Size(305, 142);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Busqueda y Manejo de Datos";
+            // 
+            // button_buscarTodo
+            // 
+            this.button_buscarTodo.Location = new System.Drawing.Point(152, 46);
+            this.button_buscarTodo.Name = "button_buscarTodo";
+            this.button_buscarTodo.Size = new System.Drawing.Size(124, 23);
+            this.button_buscarTodo.TabIndex = 17;
+            this.button_buscarTodo.Text = "Buscar Todo";
+            this.button_buscarTodo.UseVisualStyleBackColor = true;
+            this.button_buscarTodo.Click += new System.EventHandler(this.button_buscarTodo_Click);
             // 
             // numericUpDown_edicion
             // 
@@ -255,18 +269,39 @@
             this.textBox_autor.Size = new System.Drawing.Size(100, 20);
             this.textBox_autor.TabIndex = 21;
             // 
+            // button_siguiente
+            // 
+            this.button_siguiente.Location = new System.Drawing.Point(498, 214);
+            this.button_siguiente.Name = "button_siguiente";
+            this.button_siguiente.Size = new System.Drawing.Size(190, 39);
+            this.button_siguiente.TabIndex = 22;
+            this.button_siguiente.Text = "Siguiente";
+            this.button_siguiente.UseVisualStyleBackColor = true;
+            // 
+            // button_anterior
+            // 
+            this.button_anterior.Location = new System.Drawing.Point(302, 214);
+            this.button_anterior.Name = "button_anterior";
+            this.button_anterior.Size = new System.Drawing.Size(190, 39);
+            this.button_anterior.TabIndex = 23;
+            this.button_anterior.Text = "Anterior";
+            this.button_anterior.UseVisualStyleBackColor = true;
+            this.button_anterior.Click += new System.EventHandler(this.button_anterior_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button_anterior);
+            this.Controls.Add(this.button_siguiente);
             this.Controls.Add(this.textBox_autor);
             this.Controls.Add(this.label_autor);
             this.Controls.Add(this.label_edicion);
             this.Controls.Add(this.numericUpDown_edicion);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_crear);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_libros);
             this.Controls.Add(this.dateTimePicker_publicacion);
             this.Controls.Add(this.checkBox_disponible);
             this.Controls.Add(this.comboBox_empastado);
@@ -278,7 +313,7 @@
             this.Controls.Add(this.label_nombre);
             this.Name = "Form1";
             this.Text = "Biblioteca";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_libros)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_edicion)).EndInit();
@@ -298,7 +333,7 @@
         private System.Windows.Forms.ComboBox comboBox_empastado;
         private System.Windows.Forms.CheckBox checkBox_disponible;
         private System.Windows.Forms.DateTimePicker dateTimePicker_publicacion;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_libros;
         private System.Windows.Forms.Button button_actualizar;
         private System.Windows.Forms.Button button_crear;
         private System.Windows.Forms.Button button_borrar;
@@ -310,6 +345,9 @@
         private System.Windows.Forms.Label label_edicion;
         private System.Windows.Forms.Label label_autor;
         private System.Windows.Forms.TextBox textBox_autor;
+        private System.Windows.Forms.Button button_buscarTodo;
+        private System.Windows.Forms.Button button_siguiente;
+        private System.Windows.Forms.Button button_anterior;
     }
 }
 

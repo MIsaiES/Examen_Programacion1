@@ -17,5 +17,17 @@ namespace Examen_Programacion1.Datos
         public decimal edicion { get; set; }
         public string autor {  get; set; }
 
+        public Libro(int ID, string Nombre, string Genero, string Empastado, bool Disponible, DateTime Publicacion, decimal Edicion, string Autor)
+        {
+            id = ID;
+            nombre = Nombre;
+            genero = Genero;
+            empastado = Empastado;
+            disponible = Disponible;
+            publicacion = Publicacion;
+            edicion = Edicion;
+            autor = Autor;
+        }
+        public Libro() { }
     }
 }
