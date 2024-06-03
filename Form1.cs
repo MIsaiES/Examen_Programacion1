@@ -109,5 +109,20 @@ namespace Examen_Programacion1
                 conexion.Borrar(indx);
             }
         }
+
+        private void button_actualizar_Click(object sender, EventArgs e)
+        {
+            int indx;
+            int.TryParse(textBox_id.Text, out indx);
+            libro.id = indx;
+            libro.nombre = textBox_nombre.Text;
+            libro.empastado = comboBox_empastado.Text;
+            libro.genero = textBox_genero.Text;
+            libro.disponible = checkBox_disponible.Checked;
+            libro.publicacion = dateTimePicker_publicacion.Value;
+            libro.edicion = numericUpDown_edicion.Value;
+            libro.autor = textBox_autor.Text;
+            conexion.Actualizar(libro);
+        }
     }
 }

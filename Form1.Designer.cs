@@ -150,6 +150,7 @@
             this.button_actualizar.TabIndex = 11;
             this.button_actualizar.Text = "Actualizar";
             this.button_actualizar.UseVisualStyleBackColor = true;
+            this.button_actualizar.Click += new System.EventHandler(this.button_actualizar_Click);
             // 
             // button_crear
             // 
